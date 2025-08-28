@@ -43,8 +43,14 @@ Key features:
 
 cpp development mode:
 ```sh
+# python
 uv sync
 uv run cmake -G Ninja -B <build-dir> -Dmaat_DEVELOPER_MODE=ON
+
+# no python
+cmake -G Ninja -B <build-dir> -Dmaat_DEVELOPER_MODE=ON -Dmaat_BUILD_PYTHON_BINDINGS=OFF
+
+# build
 cmake --build <build-dir> --parallel
 ```
 
