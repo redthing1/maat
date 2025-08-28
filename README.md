@@ -39,6 +39,20 @@ Key features:
 - [Example](#example)
 - [Contact](#contact)
 
+# custom build
+
+cpp development mode:
+```sh
+uv sync
+uv run cmake -G Ninja -B <build-dir> -Dmaat_DEVELOPER_MODE=ON
+cmake --build <build-dir> --parallel
+```
+
+build python wheel:
+```sh
+uv build --wheel
+```
+
 # Installation
 
 To install Maat's python module:

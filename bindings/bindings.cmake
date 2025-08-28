@@ -101,11 +101,10 @@ if(NOT CMAKE_SKIP_INSTALL_RULES)
   )
 
   if(maat_PYTHON_PACKAGING)
-    # For packaging the way we want to use maat, we need to output the native
-    # Python module in the 'site-packages' directory, not the
-    # CMAKE_INSTALL_PREFIX of 'site-packages/maat'
+    # For packaging, install directly into the wheel's collection directory
+    # setuptools expects files in build/lib.*/, not its parent
     set(
-      maat_INSTALL_PYTHONMODULEDIR ".."
+      maat_INSTALL_PYTHONMODULEDIR "."
       CACHE PATH "Python module directory location relative to install prefix"
     )
   else()
@@ -125,9 +124,19 @@ if(NOT CMAKE_SKIP_INSTALL_RULES)
   )
 
   # Need to also install sleigh files when packaging
-  install(
-    DIRECTORY "${PROJECT_BINARY_DIR}/${spec_out_prefix}/"
-    DESTINATION "${maat_INSTALL_PYTHONMODULEDIR}/maat/${CMAKE_INSTALL_DATADIR}/${spec_out_prefix}"
-    COMPONENT maat_Python
-  )
+  if(maat_PYTHON_PACKAGING)
+    # For packaging, install sleigh files next to the module
+    install(
+      DIRECTORY "${PROJECT_BINARY_DIR}/${spec_out_prefix}/"
+      DESTINATION "${maat_INSTALL_PYTHONMODULEDIR}/processors"
+      COMPONENT maat_Python
+    )
+  else()
+    # For system installs, use the standard location
+    install(
+      DIRECTORY "${PROJECT_BINARY_DIR}/${spec_out_prefix}/"
+      DESTINATION "${maat_INSTALL_PYTHONMODULEDIR}/maat/${CMAKE_INSTALL_DATADIR}/${spec_out_prefix}"
+      COMPONENT maat_Python
+    )
+  endif()
 endif()

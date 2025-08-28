@@ -6,7 +6,7 @@ from pathlib import Path
 import cmake_build_extension
 from setuptools import setup
 
-source_dir = str(Path(".").absolute().parent.parent)
+source_dir = str(Path(".").absolute())
 
 additional_cmake_configure_options = []
 
@@ -24,8 +24,8 @@ setup(
     ),
     ext_modules=[
         cmake_build_extension.CMakeExtension(
-            name="Maat",
-            install_prefix="maat",
+            name="maat",
+            install_prefix=".",
             disable_editable=True,
             write_top_level_init=None,
             source_dir=source_dir,

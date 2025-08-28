@@ -149,9 +149,15 @@ public:
         std::optional<path_t> rel_dir = maat::py::get_maat_module_directory();
         if (rel_dir)
         {
-            auto dir = rel_dir.value() / "maat" / path_t(maat_specfile_dir_prefix);
-            if (auto res = find_sleigh_file_in_dir(filename, dir))
-                    return res;
+            // Try wheel structure first (processors/ directly in site-packages)
+            auto wheel_dir = rel_dir.value() / "processors";
+            if (auto res = find_sleigh_file_in_dir(filename, wheel_dir))
+                return res;
+            
+            // Try development/system install structure
+            auto system_dir = rel_dir.value() / "maat" / path_t(maat_specfile_dir_prefix);
+            if (auto res = find_sleigh_file_in_dir(filename, system_dir))
+                return res;
         }
 #endif
 
