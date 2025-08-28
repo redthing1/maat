@@ -21,7 +21,8 @@ option(maat_USE_Z3 "Build with Z3 solver backend" ON)
 option(maat_USE_LIEF "Build with LIEF loader backend" ON)
 
 # Optionally use vendored dependencies
-option(maat_USE_EXTERNAL_SLEIGH "Find an external installation of sleigh" ON)
+option(maat_USE_EXTERNAL_SLEIGH "Find an external installation of sleigh" OFF)
+option(maat_USE_EXTERNAL_LIEF "Find an external installation of LIEF" OFF)
 
 # ---- Suppress C4251 on Windows ----
 

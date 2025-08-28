@@ -2,3 +2,6 @@
 	path = src/third-party/sleigh/sleigh-cmake
 	url = https://github.com/lifting-bits/sleigh
 	branch = cmake-module-sleigh-compile
+[submodule "src/third-party/lief"]
+	path = src/third-party/lief
+	url = https://github.com/lief-project/LIEF.git
