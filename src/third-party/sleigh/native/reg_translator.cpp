@@ -1320,4 +1320,198 @@ maat::ir::Param sleigh_reg_translate_EVM(const std::string& reg_name)
             );
 }
 
+maat::ir::Param sleigh_reg_translate_ARM64(const std::string& reg_name)
+{
+    // 64-bit general purpose registers X0-X30
+    if (reg_name == "X0") return maat::ir::Reg(maat::ARM64::X0, 63, 0);
+    if (reg_name == "X1") return maat::ir::Reg(maat::ARM64::X1, 63, 0);
+    if (reg_name == "X2") return maat::ir::Reg(maat::ARM64::X2, 63, 0);
+    if (reg_name == "X3") return maat::ir::Reg(maat::ARM64::X3, 63, 0);
+    if (reg_name == "X4") return maat::ir::Reg(maat::ARM64::X4, 63, 0);
+    if (reg_name == "X5") return maat::ir::Reg(maat::ARM64::X5, 63, 0);
+    if (reg_name == "X6") return maat::ir::Reg(maat::ARM64::X6, 63, 0);
+    if (reg_name == "X7") return maat::ir::Reg(maat::ARM64::X7, 63, 0);
+    if (reg_name == "X8") return maat::ir::Reg(maat::ARM64::X8, 63, 0);
+    if (reg_name == "X9") return maat::ir::Reg(maat::ARM64::X9, 63, 0);
+    if (reg_name == "X10") return maat::ir::Reg(maat::ARM64::X10, 63, 0);
+    if (reg_name == "X11") return maat::ir::Reg(maat::ARM64::X11, 63, 0);
+    if (reg_name == "X12") return maat::ir::Reg(maat::ARM64::X12, 63, 0);
+    if (reg_name == "X13") return maat::ir::Reg(maat::ARM64::X13, 63, 0);
+    if (reg_name == "X14") return maat::ir::Reg(maat::ARM64::X14, 63, 0);
+    if (reg_name == "X15") return maat::ir::Reg(maat::ARM64::X15, 63, 0);
+    if (reg_name == "X16") return maat::ir::Reg(maat::ARM64::X16, 63, 0);
+    if (reg_name == "X17") return maat::ir::Reg(maat::ARM64::X17, 63, 0);
+    if (reg_name == "X18") return maat::ir::Reg(maat::ARM64::X18, 63, 0);
+    if (reg_name == "X19") return maat::ir::Reg(maat::ARM64::X19, 63, 0);
+    if (reg_name == "X20") return maat::ir::Reg(maat::ARM64::X20, 63, 0);
+    if (reg_name == "X21") return maat::ir::Reg(maat::ARM64::X21, 63, 0);
+    if (reg_name == "X22") return maat::ir::Reg(maat::ARM64::X22, 63, 0);
+    if (reg_name == "X23") return maat::ir::Reg(maat::ARM64::X23, 63, 0);
+    if (reg_name == "X24") return maat::ir::Reg(maat::ARM64::X24, 63, 0);
+    if (reg_name == "X25") return maat::ir::Reg(maat::ARM64::X25, 63, 0);
+    if (reg_name == "X26") return maat::ir::Reg(maat::ARM64::X26, 63, 0);
+    if (reg_name == "X27") return maat::ir::Reg(maat::ARM64::X27, 63, 0);
+    if (reg_name == "X28") return maat::ir::Reg(maat::ARM64::X28, 63, 0);
+    if (reg_name == "X29") return maat::ir::Reg(maat::ARM64::X29, 63, 0);
+    if (reg_name == "X30") return maat::ir::Reg(maat::ARM64::X30, 63, 0);
+    
+    // 64-bit general purpose registers x0-x30 (lowercase variants)
+    if (reg_name == "x0") return maat::ir::Reg(maat::ARM64::X0, 63, 0);
+    if (reg_name == "x1") return maat::ir::Reg(maat::ARM64::X1, 63, 0);
+    if (reg_name == "x2") return maat::ir::Reg(maat::ARM64::X2, 63, 0);
+    if (reg_name == "x3") return maat::ir::Reg(maat::ARM64::X3, 63, 0);
+    if (reg_name == "x4") return maat::ir::Reg(maat::ARM64::X4, 63, 0);
+    if (reg_name == "x5") return maat::ir::Reg(maat::ARM64::X5, 63, 0);
+    if (reg_name == "x6") return maat::ir::Reg(maat::ARM64::X6, 63, 0);
+    if (reg_name == "x7") return maat::ir::Reg(maat::ARM64::X7, 63, 0);
+    if (reg_name == "x8") return maat::ir::Reg(maat::ARM64::X8, 63, 0);
+    if (reg_name == "x9") return maat::ir::Reg(maat::ARM64::X9, 63, 0);
+    if (reg_name == "x10") return maat::ir::Reg(maat::ARM64::X10, 63, 0);
+    if (reg_name == "x11") return maat::ir::Reg(maat::ARM64::X11, 63, 0);
+    if (reg_name == "x12") return maat::ir::Reg(maat::ARM64::X12, 63, 0);
+    if (reg_name == "x13") return maat::ir::Reg(maat::ARM64::X13, 63, 0);
+    if (reg_name == "x14") return maat::ir::Reg(maat::ARM64::X14, 63, 0);
+    if (reg_name == "x15") return maat::ir::Reg(maat::ARM64::X15, 63, 0);
+    if (reg_name == "x16") return maat::ir::Reg(maat::ARM64::X16, 63, 0);
+    if (reg_name == "x17") return maat::ir::Reg(maat::ARM64::X17, 63, 0);
+    if (reg_name == "x18") return maat::ir::Reg(maat::ARM64::X18, 63, 0);
+    if (reg_name == "x19") return maat::ir::Reg(maat::ARM64::X19, 63, 0);
+    if (reg_name == "x20") return maat::ir::Reg(maat::ARM64::X20, 63, 0);
+    if (reg_name == "x21") return maat::ir::Reg(maat::ARM64::X21, 63, 0);
+    if (reg_name == "x22") return maat::ir::Reg(maat::ARM64::X22, 63, 0);
+    if (reg_name == "x23") return maat::ir::Reg(maat::ARM64::X23, 63, 0);
+    if (reg_name == "x24") return maat::ir::Reg(maat::ARM64::X24, 63, 0);
+    if (reg_name == "x25") return maat::ir::Reg(maat::ARM64::X25, 63, 0);
+    if (reg_name == "x26") return maat::ir::Reg(maat::ARM64::X26, 63, 0);
+    if (reg_name == "x27") return maat::ir::Reg(maat::ARM64::X27, 63, 0);
+    if (reg_name == "x28") return maat::ir::Reg(maat::ARM64::X28, 63, 0);
+    if (reg_name == "x29") return maat::ir::Reg(maat::ARM64::X29, 63, 0);
+    if (reg_name == "x30") return maat::ir::Reg(maat::ARM64::X30, 63, 0);
+    
+    // 32-bit general purpose registers W0-W30 (lower 32 bits of X registers)
+    if (reg_name == "W0") return maat::ir::Reg(maat::ARM64::X0, 31, 0);
+    if (reg_name == "W1") return maat::ir::Reg(maat::ARM64::X1, 31, 0);
+    if (reg_name == "W2") return maat::ir::Reg(maat::ARM64::X2, 31, 0);
+    if (reg_name == "W3") return maat::ir::Reg(maat::ARM64::X3, 31, 0);
+    if (reg_name == "W4") return maat::ir::Reg(maat::ARM64::X4, 31, 0);
+    if (reg_name == "W5") return maat::ir::Reg(maat::ARM64::X5, 31, 0);
+    if (reg_name == "W6") return maat::ir::Reg(maat::ARM64::X6, 31, 0);
+    if (reg_name == "W7") return maat::ir::Reg(maat::ARM64::X7, 31, 0);
+    if (reg_name == "W8") return maat::ir::Reg(maat::ARM64::X8, 31, 0);
+    if (reg_name == "W9") return maat::ir::Reg(maat::ARM64::X9, 31, 0);
+    if (reg_name == "W10") return maat::ir::Reg(maat::ARM64::X10, 31, 0);
+    if (reg_name == "W11") return maat::ir::Reg(maat::ARM64::X11, 31, 0);
+    if (reg_name == "W12") return maat::ir::Reg(maat::ARM64::X12, 31, 0);
+    if (reg_name == "W13") return maat::ir::Reg(maat::ARM64::X13, 31, 0);
+    if (reg_name == "W14") return maat::ir::Reg(maat::ARM64::X14, 31, 0);
+    if (reg_name == "W15") return maat::ir::Reg(maat::ARM64::X15, 31, 0);
+    if (reg_name == "W16") return maat::ir::Reg(maat::ARM64::X16, 31, 0);
+    if (reg_name == "W17") return maat::ir::Reg(maat::ARM64::X17, 31, 0);
+    if (reg_name == "W18") return maat::ir::Reg(maat::ARM64::X18, 31, 0);
+    if (reg_name == "W19") return maat::ir::Reg(maat::ARM64::X19, 31, 0);
+    if (reg_name == "W20") return maat::ir::Reg(maat::ARM64::X20, 31, 0);
+    if (reg_name == "W21") return maat::ir::Reg(maat::ARM64::X21, 31, 0);
+    if (reg_name == "W22") return maat::ir::Reg(maat::ARM64::X22, 31, 0);
+    if (reg_name == "W23") return maat::ir::Reg(maat::ARM64::X23, 31, 0);
+    if (reg_name == "W24") return maat::ir::Reg(maat::ARM64::X24, 31, 0);
+    if (reg_name == "W25") return maat::ir::Reg(maat::ARM64::X25, 31, 0);
+    if (reg_name == "W26") return maat::ir::Reg(maat::ARM64::X26, 31, 0);
+    if (reg_name == "W27") return maat::ir::Reg(maat::ARM64::X27, 31, 0);
+    if (reg_name == "W28") return maat::ir::Reg(maat::ARM64::X28, 31, 0);
+    if (reg_name == "W29") return maat::ir::Reg(maat::ARM64::X29, 31, 0);
+    if (reg_name == "W30") return maat::ir::Reg(maat::ARM64::X30, 31, 0);
+    
+    // 32-bit general purpose registers w0-w30 (lowercase variants)
+    if (reg_name == "w0") return maat::ir::Reg(maat::ARM64::X0, 31, 0);
+    if (reg_name == "w1") return maat::ir::Reg(maat::ARM64::X1, 31, 0);
+    if (reg_name == "w2") return maat::ir::Reg(maat::ARM64::X2, 31, 0);
+    if (reg_name == "w3") return maat::ir::Reg(maat::ARM64::X3, 31, 0);
+    if (reg_name == "w4") return maat::ir::Reg(maat::ARM64::X4, 31, 0);
+    if (reg_name == "w5") return maat::ir::Reg(maat::ARM64::X5, 31, 0);
+    if (reg_name == "w6") return maat::ir::Reg(maat::ARM64::X6, 31, 0);
+    if (reg_name == "w7") return maat::ir::Reg(maat::ARM64::X7, 31, 0);
+    if (reg_name == "w8") return maat::ir::Reg(maat::ARM64::X8, 31, 0);
+    if (reg_name == "w9") return maat::ir::Reg(maat::ARM64::X9, 31, 0);
+    if (reg_name == "w10") return maat::ir::Reg(maat::ARM64::X10, 31, 0);
+    if (reg_name == "w11") return maat::ir::Reg(maat::ARM64::X11, 31, 0);
+    if (reg_name == "w12") return maat::ir::Reg(maat::ARM64::X12, 31, 0);
+    if (reg_name == "w13") return maat::ir::Reg(maat::ARM64::X13, 31, 0);
+    if (reg_name == "w14") return maat::ir::Reg(maat::ARM64::X14, 31, 0);
+    if (reg_name == "w15") return maat::ir::Reg(maat::ARM64::X15, 31, 0);
+    if (reg_name == "w16") return maat::ir::Reg(maat::ARM64::X16, 31, 0);
+    if (reg_name == "w17") return maat::ir::Reg(maat::ARM64::X17, 31, 0);
+    if (reg_name == "w18") return maat::ir::Reg(maat::ARM64::X18, 31, 0);
+    if (reg_name == "w19") return maat::ir::Reg(maat::ARM64::X19, 31, 0);
+    if (reg_name == "w20") return maat::ir::Reg(maat::ARM64::X20, 31, 0);
+    if (reg_name == "w21") return maat::ir::Reg(maat::ARM64::X21, 31, 0);
+    if (reg_name == "w22") return maat::ir::Reg(maat::ARM64::X22, 31, 0);
+    if (reg_name == "w23") return maat::ir::Reg(maat::ARM64::X23, 31, 0);
+    if (reg_name == "w24") return maat::ir::Reg(maat::ARM64::X24, 31, 0);
+    if (reg_name == "w25") return maat::ir::Reg(maat::ARM64::X25, 31, 0);
+    if (reg_name == "w26") return maat::ir::Reg(maat::ARM64::X26, 31, 0);
+    if (reg_name == "w27") return maat::ir::Reg(maat::ARM64::X27, 31, 0);
+    if (reg_name == "w28") return maat::ir::Reg(maat::ARM64::X28, 31, 0);
+    if (reg_name == "w29") return maat::ir::Reg(maat::ARM64::X29, 31, 0);
+    if (reg_name == "w30") return maat::ir::Reg(maat::ARM64::X30, 31, 0);
+    
+    // Special registers
+    if (reg_name == "SP") return maat::ir::Reg(maat::ARM64::SP, 63, 0);
+    if (reg_name == "sp") return maat::ir::Reg(maat::ARM64::SP, 63, 0);
+    if (reg_name == "WSP") return maat::ir::Reg(maat::ARM64::SP, 31, 0);
+    if (reg_name == "wsp") return maat::ir::Reg(maat::ARM64::SP, 31, 0);
+    if (reg_name == "PC") return maat::ir::Reg(maat::ARM64::PC, 63, 0);
+    if (reg_name == "pc") return maat::ir::Reg(maat::ARM64::PC, 63, 0);
+    if (reg_name == "XZR") return maat::ir::Reg(maat::ARM64::ZR, 63, 0);
+    if (reg_name == "WZR") return maat::ir::Reg(maat::ARM64::ZR, 31, 0);
+    if (reg_name == "xzr") return maat::ir::Reg(maat::ARM64::ZR, 63, 0);
+    if (reg_name == "wzr") return maat::ir::Reg(maat::ARM64::ZR, 31, 0);
+    
+    // Temporary registers used by SLEIGH
+    if (reg_name == "tmpCY") return maat::ir::Reg(maat::ARM64::CF, 7, 0);
+    if (reg_name == "tmpOV") return maat::ir::Reg(maat::ARM64::VF, 7, 0);
+    if (reg_name == "tmpNG") return maat::ir::Reg(maat::ARM64::NF, 7, 0);
+    if (reg_name == "tmpZR") return maat::ir::Reg(maat::ARM64::ZF, 7, 0);
+    
+    // Status flags (SLEIGH naming convention)
+    if (reg_name == "NG") return maat::ir::Reg(maat::ARM64::NF, 7, 0);
+    if (reg_name == "ng") return maat::ir::Reg(maat::ARM64::NF, 7, 0);
+    if (reg_name == "ZR") return maat::ir::Reg(maat::ARM64::ZF, 7, 0);
+    if (reg_name == "zr") return maat::ir::Reg(maat::ARM64::ZF, 7, 0);
+    if (reg_name == "CY") return maat::ir::Reg(maat::ARM64::CF, 7, 0);
+    if (reg_name == "cy") return maat::ir::Reg(maat::ARM64::CF, 7, 0);
+    if (reg_name == "OV") return maat::ir::Reg(maat::ARM64::VF, 7, 0);
+    if (reg_name == "ov") return maat::ir::Reg(maat::ARM64::VF, 7, 0);
+    if (reg_name == "shift_carry") return maat::ir::Reg(maat::ARM64::CF, 7, 0);
+    
+    // Status flags (traditional ARM naming)
+    if (reg_name == "NF") return maat::ir::Reg(maat::ARM64::NF, 7, 0);
+    if (reg_name == "nf") return maat::ir::Reg(maat::ARM64::NF, 7, 0);
+    if (reg_name == "ZF") return maat::ir::Reg(maat::ARM64::ZF, 7, 0);
+    if (reg_name == "zf") return maat::ir::Reg(maat::ARM64::ZF, 7, 0);
+    if (reg_name == "CF") return maat::ir::Reg(maat::ARM64::CF, 7, 0);
+    if (reg_name == "cf") return maat::ir::Reg(maat::ARM64::CF, 7, 0);
+    if (reg_name == "VF") return maat::ir::Reg(maat::ARM64::VF, 7, 0);
+    if (reg_name == "vf") return maat::ir::Reg(maat::ARM64::VF, 7, 0);
+    
+    // System registers
+    if (reg_name == "CNTPCT_EL0") return maat::ir::Reg(maat::ARM64::CNTPCT_EL0, 63, 0);
+    if (reg_name == "cntpct_el0") return maat::ir::Reg(maat::ARM64::CNTPCT_EL0, 63, 0);
+    
+    // Alternative names
+    if (reg_name == "FP") return maat::ir::Reg(maat::ARM64::X29, 63, 0);
+    if (reg_name == "fp") return maat::ir::Reg(maat::ARM64::X29, 63, 0);
+    if (reg_name == "LR") return maat::ir::Reg(maat::ARM64::X30, 63, 0);
+    if (reg_name == "lr") return maat::ir::Reg(maat::ARM64::X30, 63, 0);
+    
+    // NZCV composite status register (if used by SLEIGH)
+    if (reg_name == "NZCV") return maat::ir::Reg(maat::ARM64::NZCV, 31, 0);
+    if (reg_name == "nzcv") return maat::ir::Reg(maat::ARM64::NZCV, 31, 0);
+
+    throw maat::runtime_exception(maat::Fmt()
+            << "ARM64: Register translation from SLEIGH to MAAT missing for register "
+            << reg_name
+            >> maat::Fmt::to_str
+            );
+}
+
 } // namespace maat

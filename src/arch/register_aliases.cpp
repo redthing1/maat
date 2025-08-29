@@ -136,6 +136,59 @@ Value x64_alias_getter(CPUContext& ctx, ir::reg_t reg)
 
 std::set x64_aliases{X64::RFLAGS};
 
+void arm64_alias_setter(CPUContext& ctx, ir::reg_t reg, const Value& val)
+{
+    // Handle ZR register: ignore all writes (zero register always reads as zero)
+    if (reg == ARM64::ZR)
+        return;
+    
+    // Handle NZCV composite register
+    if (reg == ARM64::NZCV)
+    {
+        // Extract individual flag bits from NZCV value
+        Value nzcv_val = extract(val, 31, 0);  // Ensure 32-bit
+        ctx.set(ARM64::NF, concat(Value(7, 0), extract(nzcv_val, 31, 31)));  // N flag from bit 31
+        ctx.set(ARM64::ZF, concat(Value(7, 0), extract(nzcv_val, 30, 30)));  // Z flag from bit 30
+        ctx.set(ARM64::CF, concat(Value(7, 0), extract(nzcv_val, 29, 29)));  // C flag from bit 29
+        ctx.set(ARM64::VF, concat(Value(7, 0), extract(nzcv_val, 28, 28)));  // V flag from bit 28
+        return;
+    }
+    
+    throw runtime_exception("arm64_alias_setter: got unsupported register");
+}
+
+Value arm64_alias_getter(CPUContext& ctx, ir::reg_t reg)
+{
+    // Handle ZR register: always return zero
+    if (reg == ARM64::ZR)
+        return Value(64, 0);
+    
+    // Handle NZCV composite register
+    if (reg == ARM64::NZCV)
+    {
+        // Pack individual flags into NZCV format
+        // NZCV layout: N=bit31, Z=bit30, C=bit29, V=bit28, others=0
+        Value nf = extract(ctx.get(ARM64::NF), 0, 0);  // Get bit 0 of NF
+        Value zf = extract(ctx.get(ARM64::ZF), 0, 0);  // Get bit 0 of ZF  
+        Value cf = extract(ctx.get(ARM64::CF), 0, 0);  // Get bit 0 of CF
+        Value vf = extract(ctx.get(ARM64::VF), 0, 0);  // Get bit 0 of VF
+        
+        // Build NZCV: [N:Z:C:V:0000...] = [bit31:bit30:bit29:bit28:bits27-0]
+        Value nzcv = concat(nf, zf);        // N:Z (bits 31-30)
+        nzcv = concat(nzcv, cf);            // N:Z:C (bits 31-29)
+        nzcv = concat(nzcv, vf);            // N:Z:C:V (bits 31-28)
+        nzcv = concat(nzcv, Value(28, 0));  // N:Z:C:V:0000... (bits 31-0)
+        return nzcv;
+    }
+    
+    throw runtime_exception("arm64_alias_getter: got unsupported register");
+}
+
+std::set arm64_aliases{
+    ARM64::ZR,
+    ARM64::NZCV
+};
+
 void CPUContext::init_alias_getset(Arch::Type arch)
 {
     if (arch == Arch::Type::X86)
@@ -149,6 +202,12 @@ void CPUContext::init_alias_getset(Arch::Type arch)
         alias_setter = x64_alias_setter;
         alias_getter = x64_alias_getter;
         aliased_regs = x64_aliases;
+    }
+    else if (arch == Arch::Type::ARM64)
+    {
+        alias_setter = arm64_alias_setter;
+        alias_getter = arm64_alias_getter;
+        aliased_regs = arm64_aliases;
     }
 }
 

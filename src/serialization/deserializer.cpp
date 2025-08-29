@@ -108,6 +108,8 @@ Serializable* Deserializer::Factory::new_object(uid_t class_uid)
     {
         case ClassId::ARCH_NONE:
             return new ArchNone();
+        case ClassId::ARCH_ARM64:
+            return new ARM64::ArchARM64();
         case ClassId::ARCH_X64:
             return new X64::ArchX64();
         case ClassId::ARCH_X86:

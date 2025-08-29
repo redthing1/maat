@@ -38,6 +38,7 @@ enum ClassId : uid_t
 {
     ABSTRACT_COUNTER=1,
     ARCH_NONE,
+    ARCH_ARM64,
     ARCH_X64,
     ARCH_X86,
     BRANCH,

@@ -45,6 +45,7 @@ serial::uid_t Arch::class_uid() const
     {
         case Arch::Type::X86: return serial::ClassId::ARCH_X86;
         case Arch::Type::X64: return serial::ClassId::ARCH_X64;
+        case Arch::Type::ARM64: return serial::ClassId::ARCH_ARM64;
         case Arch::Type::NONE: return serial::ClassId::ARCH_NONE;
         default:
             throw serialize_exception("Arch::class_uid(): unsupported arch type");

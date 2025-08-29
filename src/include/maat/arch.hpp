@@ -55,7 +55,7 @@ public:
         X86, ///< Intel X86
         X64, ///< Intel X86_64
         ARM32, // TODO ///< armv7 (32 bits)
-        ARM64, // TODO ///< armv8 (64 bits)
+        ARM64, ///< ARMv8 AArch64 (64 bits)
         EVM, ///< Ethereum byte-code
         NONE
     };
@@ -357,62 +357,67 @@ namespace EVM
 } // namespace EVM
 
 
-// TODO add to doxygen when ready
-// Namespace for ARMv8 (64-bits) specific definitions and classes
+/// Namespace for ARM64 (AArch64) specific definitions and classes
 namespace ARM64
 {
-    static constexpr reg_t R0 = 0;
-    static constexpr reg_t R1 = 1;
-    static constexpr reg_t R2 = 2;
-    static constexpr reg_t R3 = 3;
-    static constexpr reg_t R4 = 4;
-    static constexpr reg_t R5 = 5;
-    static constexpr reg_t R6 = 6;
-    static constexpr reg_t R7 = 7;
-    static constexpr reg_t R8 = 8;
-    static constexpr reg_t R9 = 9;
-    static constexpr reg_t R10 = 10;
-    static constexpr reg_t R11 = 11;
-    static constexpr reg_t R12 = 12;
-    static constexpr reg_t R13 = 13;
-    static constexpr reg_t R14 = 14;
-    static constexpr reg_t R15 = 15;
-    static constexpr reg_t R16 = 16;
-    static constexpr reg_t R17 = 17;
-    static constexpr reg_t R18 = 18;
-    static constexpr reg_t R19 = 19;
-    static constexpr reg_t R20 = 20;
-    static constexpr reg_t R21 = 21;
-    static constexpr reg_t R22 = 22;
-    static constexpr reg_t R23 = 23;
-    static constexpr reg_t R24 = 24;
-    static constexpr reg_t R25 = 25;
-    static constexpr reg_t R26 = 26;
-    static constexpr reg_t R27 = 27;
-    static constexpr reg_t R28 = 28;
-    static constexpr reg_t R29 = 29;
-    static constexpr reg_t R30 = 30;
-    static constexpr reg_t LR = 30; // Same as R30
-    static constexpr reg_t R31 = 31;
-    static constexpr reg_t PC = 32;
-    static constexpr reg_t SP = 33;
-    static constexpr reg_t ZR = 34;
-    static constexpr reg_t ZF = 35;
-    static constexpr reg_t NF = 36;
-    static constexpr reg_t CF = 37;
-    static constexpr reg_t VF = 38;
-    static constexpr reg_t CNTPCT_EL0 = 39; // Physical cycle counter
+    /* General Purpose Registers (64-bit) */
+    static constexpr reg_t X0 = 0; ///< General purpose register
+    static constexpr reg_t X1 = 1; ///< General purpose register
+    static constexpr reg_t X2 = 2; ///< General purpose register
+    static constexpr reg_t X3 = 3; ///< General purpose register
+    static constexpr reg_t X4 = 4; ///< General purpose register
+    static constexpr reg_t X5 = 5; ///< General purpose register
+    static constexpr reg_t X6 = 6; ///< General purpose register
+    static constexpr reg_t X7 = 7; ///< General purpose register
+    static constexpr reg_t X8 = 8; ///< General purpose register
+    static constexpr reg_t X9 = 9; ///< General purpose register
+    static constexpr reg_t X10 = 10; ///< General purpose register
+    static constexpr reg_t X11 = 11; ///< General purpose register
+    static constexpr reg_t X12 = 12; ///< General purpose register
+    static constexpr reg_t X13 = 13; ///< General purpose register
+    static constexpr reg_t X14 = 14; ///< General purpose register
+    static constexpr reg_t X15 = 15; ///< General purpose register
+    static constexpr reg_t X16 = 16; ///< General purpose register
+    static constexpr reg_t X17 = 17; ///< General purpose register
+    static constexpr reg_t X18 = 18; ///< General purpose register
+    static constexpr reg_t X19 = 19; ///< General purpose register
+    static constexpr reg_t X20 = 20; ///< General purpose register
+    static constexpr reg_t X21 = 21; ///< General purpose register
+    static constexpr reg_t X22 = 22; ///< General purpose register
+    static constexpr reg_t X23 = 23; ///< General purpose register
+    static constexpr reg_t X24 = 24; ///< General purpose register
+    static constexpr reg_t X25 = 25; ///< General purpose register
+    static constexpr reg_t X26 = 26; ///< General purpose register
+    static constexpr reg_t X27 = 27; ///< General purpose register
+    static constexpr reg_t X28 = 28; ///< General purpose register
+    static constexpr reg_t X29 = 29; ///< Frame pointer
+    static constexpr reg_t X30 = 30; ///< Link register
+    /* Special registers */
+    static constexpr reg_t SP = 31; ///< Stack pointer
+    static constexpr reg_t PC = 32; ///< Program counter
+    static constexpr reg_t ZR = 33; ///< Zero register (read as zero, writes ignored)
+    /* Status flags */
+    static constexpr reg_t NF = 34; ///< Negative flag
+    static constexpr reg_t ZF = 35; ///< Zero flag
+    static constexpr reg_t CF = 36; ///< Carry flag
+    static constexpr reg_t VF = 37; ///< Overflow flag
+    /* System registers */
+    static constexpr reg_t CNTPCT_EL0 = 38; ///< Physical cycle counter
+    /* Register aliases for common references */
+    static constexpr reg_t FP = X29; ///< Frame pointer (alias for X29)
+    static constexpr reg_t LR = X30; ///< Link register (alias for X30)
+    /* Composite status register */
+    static constexpr reg_t NZCV = 39; ///< Composite status register (N, Z, C, V flags)
     static constexpr reg_t NB_REGS = 40;
 
-     /** \addtogroup arch
+    /** \addtogroup arch
      * \{ */
+    /// ARM64/AArch64 architecture
     class ArchARM64: public Arch
     {
     public:
         ArchARM64();
         virtual ~ArchARM64() = default;
-        const std::string& reg_name(reg_t num) const;
-        reg_t reg_num(const std::string& name) const;
         size_t reg_size(reg_t reg_num) const;
         reg_t sp() const;
         reg_t pc() const;
