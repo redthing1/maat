@@ -408,7 +408,40 @@ namespace ARM64
     static constexpr reg_t LR = X30; ///< Link register (alias for X30)
     /* Composite status register */
     static constexpr reg_t NZCV = 39; ///< Composite status register (N, Z, C, V flags)
-    static constexpr reg_t NB_REGS = 40;
+    /* SVE registers Z0-Z31 */
+    static constexpr reg_t Z0 = 40; ///< SVE register
+    static constexpr reg_t Z1 = 41; ///< SVE register
+    static constexpr reg_t Z2 = 42; ///< SVE register
+    static constexpr reg_t Z3 = 43; ///< SVE register
+    static constexpr reg_t Z4 = 44; ///< SVE register
+    static constexpr reg_t Z5 = 45; ///< SVE register
+    static constexpr reg_t Z6 = 46; ///< SVE register
+    static constexpr reg_t Z7 = 47; ///< SVE register
+    static constexpr reg_t Z8 = 48; ///< SVE register
+    static constexpr reg_t Z9 = 49; ///< SVE register
+    static constexpr reg_t Z10 = 50; ///< SVE register
+    static constexpr reg_t Z11 = 51; ///< SVE register
+    static constexpr reg_t Z12 = 52; ///< SVE register
+    static constexpr reg_t Z13 = 53; ///< SVE register
+    static constexpr reg_t Z14 = 54; ///< SVE register
+    static constexpr reg_t Z15 = 55; ///< SVE register
+    static constexpr reg_t Z16 = 56; ///< SVE register
+    static constexpr reg_t Z17 = 57; ///< SVE register
+    static constexpr reg_t Z18 = 58; ///< SVE register
+    static constexpr reg_t Z19 = 59; ///< SVE register
+    static constexpr reg_t Z20 = 60; ///< SVE register
+    static constexpr reg_t Z21 = 61; ///< SVE register
+    static constexpr reg_t Z22 = 62; ///< SVE register
+    static constexpr reg_t Z23 = 63; ///< SVE register
+    static constexpr reg_t Z24 = 64; ///< SVE register
+    static constexpr reg_t Z25 = 65; ///< SVE register
+    static constexpr reg_t Z26 = 66; ///< SVE register
+    static constexpr reg_t Z27 = 67; ///< SVE register
+    static constexpr reg_t Z28 = 68; ///< SVE register
+    static constexpr reg_t Z29 = 69; ///< SVE register
+    static constexpr reg_t Z30 = 70; ///< SVE register
+    static constexpr reg_t Z31 = 71; ///< SVE register
+    static constexpr reg_t NB_REGS = 72;
 
     /** \addtogroup arch
      * \{ */

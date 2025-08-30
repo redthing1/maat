@@ -53,7 +53,16 @@ namespace ARM64
             {"cntpct_el0", CNTPCT_EL0},
             {"fp", X29}, // Frame pointer alias for X29
             {"lr", X30}, // Link register alias for X30
-            {"nzcv", NZCV}
+            {"nzcv", NZCV},
+            // SVE registers
+            {"z0", Z0}, {"z1", Z1}, {"z2", Z2}, {"z3", Z3},
+            {"z4", Z4}, {"z5", Z5}, {"z6", Z6}, {"z7", Z7},
+            {"z8", Z8}, {"z9", Z9}, {"z10", Z10}, {"z11", Z11},
+            {"z12", Z12}, {"z13", Z13}, {"z14", Z14}, {"z15", Z15},
+            {"z16", Z16}, {"z17", Z17}, {"z18", Z18}, {"z19", Z19},
+            {"z20", Z20}, {"z21", Z21}, {"z22", Z22}, {"z23", Z23},
+            {"z24", Z24}, {"z25", Z25}, {"z26", Z26}, {"z27", Z27},
+            {"z28", Z28}, {"z29", Z29}, {"z30", Z30}, {"z31", Z31}
         };
     }
 
@@ -109,6 +118,12 @@ namespace ARM64
             // Composite status register
             case NZCV:
                 return 32;
+            // SVE registers (256-bit)
+            case Z0: case Z1: case Z2: case Z3: case Z4: case Z5: case Z6: case Z7:
+            case Z8: case Z9: case Z10: case Z11: case Z12: case Z13: case Z14: case Z15:
+            case Z16: case Z17: case Z18: case Z19: case Z20: case Z21: case Z22: case Z23:
+            case Z24: case Z25: case Z26: case Z27: case Z28: case Z29: case Z30: case Z31:
+                return 256;
             default:
                 throw runtime_exception("ArchARM64::reg_size(): got unsupported reg num");
         }

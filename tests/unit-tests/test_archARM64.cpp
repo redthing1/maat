@@ -1,6 +1,7 @@
 #include "maat/arch.hpp"
 #include "maat/engine.hpp"
 #include "maat/exception.hpp"
+#include "maat/expression.hpp"
 #include <cassert>
 #include <iostream>
 #include <string>
@@ -740,6 +741,73 @@ namespace test{
             return nb;
         }
         
+        unsigned int test_simd_registers()
+        {
+            unsigned int nb = 0;
+            ARM64::ArchARM64 arch = ARM64::ArchARM64();
+            MaatEngine engine(Arch::Type::ARM64);
+            
+            nb += _assert(arch.reg_size(ARM64::Z0) == 256, "ArchARM64: Z0 size should be 256 bits");
+            nb += _assert(arch.reg_size(ARM64::Z31) == 256, "ArchARM64: Z31 size should be 256 bits");
+            
+            engine.cpu.ctx().set(ARM64::Z0, exprcst(256, "0123456789abcdef0123456789abcdef0123456789abcdef0123456789abcdef"));
+            nb += _assert_bignum_eq(
+                engine.cpu.ctx().get(ARM64::Z0),
+                "0x123456789abcdef0123456789abcdef0123456789abcdef0123456789abcdef",
+                "ArchARM64: Z0 register read/write"
+            );
+            
+            engine.cpu.ctx().set(ARM64::Z15, exprcst(256, "fedcba9876543210fedcba9876543210fedcba9876543210fedcba9876543210"));
+            nb += _assert_bignum_eq(
+                engine.cpu.ctx().get(ARM64::Z15),
+                "0xfedcba9876543210fedcba9876543210fedcba9876543210fedcba9876543210",
+                "ArchARM64: Z15 register read/write"
+            );
+            
+            return nb;
+        }
+        
+        unsigned int disass_fmov(MaatEngine& engine)
+        {
+            unsigned int nb = 0;
+            std::string code;
+            
+            code = std::string("\x20\x40\x60\x1E", 4); // fmov d0, d1
+            engine.mem->write_buffer(0x1600, (uint8_t*)code.c_str(), 4);
+            engine.mem->write_buffer(0x1604, (uint8_t*)std::string("\x00\x00\x20\xD4", 4).c_str(), 4); // brk #0
+            
+            engine.cpu.ctx().set(ARM64::Z1, exprcst(256, "1122334455667788aabbccddeeff00111122334455667788aabbccddeeff0011"));
+            engine.run_from(0x1600, 1);
+            
+            Value v0_result = engine.cpu.ctx().get(ARM64::Z0);
+            nb += _assert(v0_result.as_expr()->size == 256, "ArchARM64: FMOV D0, D1 execution test");
+            
+            return nb;
+        }
+        
+        unsigned int disass_ldr_q(MaatEngine& engine)
+        {
+            unsigned int nb = 0;
+            std::string code;
+            
+            code = std::string("\x20\x00\xC0\x3D", 4); // ldr q0, [x1]
+            engine.mem->write_buffer(0x1700, (uint8_t*)code.c_str(), 4);
+            engine.mem->write_buffer(0x1704, (uint8_t*)std::string("\x00\x00\x20\xD4", 4).c_str(), 4); // brk #0
+            
+            engine.mem->write(0x4000, exprcst(128, "123456789abcdef0deadbeefcafebabe"));
+            engine.cpu.ctx().set(ARM64::X1, exprcst(64, 0x4000));
+            
+            engine.run_from(0x1700, 1);
+            
+            nb += _assert_bignum_eq(
+                extract(engine.cpu.ctx().get(ARM64::Z0).as_expr(), 127, 0),
+                "0x123456789abcdef00000000000000000",
+                "ArchARM64: LDR Q0, [X1] execution test"
+            );
+            
+            return nb;
+        }
+        
     } // namespace archARM64
 } // namespace test
 
@@ -761,6 +829,7 @@ void test_archARM64()
     engine.mem->map(0x1000, 0x2000);    // Code section
     engine.mem->map(0x2000, 0x3000);    // Data section for LDR tests
     engine.mem->map(0x3000, 0x4000);    // Data section for STR tests
+    engine.mem->map(0x4000, 0x5000);    // Data section
 
     total += reg_translation();
     total += register_aliasing();
@@ -768,6 +837,9 @@ void test_archARM64()
     total += test_special_registers();
     total += register_sizes();
     total += test_nzcv_composite();
+    total += test_simd_registers();
+    total += disass_fmov(engine);
+    total += disass_ldr_q(engine);
     total += disass_add(engine);
     total += disass_mov(engine);
     total += disass_ldr(engine);
